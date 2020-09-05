@@ -1,18 +1,16 @@
-package com.example.thymeleaf.web;
+package com.example.week2.web;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.example.thymeleaf.model.Message;
 
+import com.example.week2.model.Message;
 
-@Controller
-public class ThymeleafHelloController {
-
+public class ThymeleafController {
+	
 	@RequestMapping("/hello")
 	public String greeting(@RequestParam(value = "name") String name, Model model) {
 		model.addAttribute("name", name);
@@ -29,5 +27,4 @@ public class ThymeleafHelloController {
 		model.addAttribute("messages", messages);
 		return "message"; //returns name of the View thus message
 	}
-
 }

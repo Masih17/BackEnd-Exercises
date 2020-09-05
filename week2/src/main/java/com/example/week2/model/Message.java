@@ -1,6 +1,6 @@
-package com.example.thymeleaf.model;
+package com.example.week2.model;
 
-// THIS STYLE of Model ONLY WORKS FOR WEEK TWO TASKS. 
+//THIS STYLE of Model ONLY WORKS FOR WEEK TWO TASKS. 
 
 public class Message {
 	private int id;
