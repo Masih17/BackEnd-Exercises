@@ -5,7 +5,12 @@
 <meta charset="UTF-8">
 <title>Thymeleaf Model and View</title>
 </head>
-<body>
-	<h1 th:text="'Helloooo ' + ${name}"></h1>
+<body>	
+		<div th:if="${age} &lt; 17">
+			<h1>You are too young!</h1>
+		</div>
+		<div th:if="${age} &gt;18">
+			<h1 th:text="'Welcome ' + ${name} "></h1>
+		</div>
 </body>
 </html>
