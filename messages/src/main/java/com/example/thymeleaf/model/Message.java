@@ -6,12 +6,10 @@ public class Message {
 	private int id;
 	private String title;
 	private String text;
-	
+
 	public Message() {
 		super();
 	}
-	
-	
 
 	public Message(int id, String title, String text) {
 		super();
@@ -19,8 +17,6 @@ public class Message {
 		this.title = title;
 		this.text = text;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -50,7 +46,5 @@ public class Message {
 	public String toString() {
 		return "Message [id=" + id + ", title=" + title + ", text=" + text + "]";
 	}
-	
-	
-	
+
 }

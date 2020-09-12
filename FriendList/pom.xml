@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>messages</artifactId>
+	<artifactId>FriendList</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>thymeleaf</name>
-	<description>Demo project for Spring Boot</description>
+	<name>FriendList</name>
+	<description>Third exercise</description>
 
 	<properties>
 		<java.version>14</java.version>
