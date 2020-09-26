@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
+import com.example.bookstore.domain.Category;
+import com.example.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookStoreApplication {
@@ -21,16 +23,20 @@ public class BookStoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookListCommand(BookRepository repository) {
+	public CommandLineRunner bookListCommand(BookRepository repository, CategoryRepository catrepository) {
 		return (args) -> {
 
 			// Your code...add some demo data to db
 
 			log.info("Few test book");
+			catrepository.save(new Category("History"));
+			catrepository.save(new Category("Bio"));
+			catrepository.save(new Category("Fiction"));
+			catrepository.save(new Category("Philosophical"));
 			
-			repository.save(new Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 2011, "978-952-279-470-3", 12.00));
-			repository.save(new Book("Homo Deus: A Brief History of Tomorrow", "Yuval Noah Harari", 2016, "978-191-070-187-4", 15.00));
-			repository.save(new Book("Zen and the Art of Motorcycle Maintenance", "Robert M. Pirsig", 1974, "0-688-00230-7", 17.00));
+			repository.save(new Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 2011, "978-952-279-470-3", 12.00, catrepository.findByName("History").get(0)));
+			repository.save(new Book("Homo Deus: A Brief History of Tomorrow", "Yuval Noah Harari", 2016, "978-191-070-187-4", 15.00, catrepository.findByName("History").get(0)));
+			repository.save(new Book("Zen and the Art of Motorcycle Maintenance", "Robert M. Pirsig", 1974, "0-688-00230-7", 17.00, catrepository.findByName("Fiction").get(0)));
 
 			log.info("Showing your books");
 			
