@@ -23,25 +23,32 @@ public class BookStoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookListCommand(BookRepository repository, CategoryRepository catrepository) {
+	public CommandLineRunner bookListCommand(BookRepository brepository, CategoryRepository crepository) {
 		return (args) -> {
 
 			// Your code...add some demo data to db
 
 			log.info("Few test book");
-			catrepository.save(new Category("History"));
-			catrepository.save(new Category("Bio"));
-			catrepository.save(new Category("Fiction"));
-			catrepository.save(new Category("Philosophical"));
 			
-			repository.save(new Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 2011, "978-952-279-470-3", 12.00, catrepository.findByName("History").get(0)));
-			repository.save(new Book("Homo Deus: A Brief History of Tomorrow", "Yuval Noah Harari", 2016, "978-191-070-187-4", 15.00, catrepository.findByName("History").get(0)));
-			repository.save(new Book("Zen and the Art of Motorcycle Maintenance", "Robert M. Pirsig", 1974, "0-688-00230-7", 17.00, catrepository.findByName("Fiction").get(0)));
+			Category history = new Category("History");
+			Category biography = new Category("Biography");
+			Category fiction = new Category("Fiction");
+			Category philosophical = new Category("Philosophical");
+			
+			crepository.save(history);
+			crepository.save(biography);
+			crepository.save(fiction);
+			crepository.save(philosophical);
+			
+			brepository.save(new Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 2011, "978-952-279-470-3", 12.00, history));
+			brepository.save(new Book("Homo Deus: A Brief History of Tomorrow", "Yuval Noah Harari", 2016, "978-191-070-187-4", 15.00, history));
+			brepository.save(new Book("Zen and the Art of Motorcycle Maintenance", "Robert M. Pirsig", 1974, "0-688-00230-7", 17.00,fiction));
 
 			log.info("Showing your books");
 			
-			for (Book book : repository.findAll()) {
+			for (Book book : brepository.findAll()) {
 				log.info(book.toString());
+			
 			}
 
 		};

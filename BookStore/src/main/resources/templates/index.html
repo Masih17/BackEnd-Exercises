@@ -29,7 +29,8 @@
 				<td th:text="${book.year}"></td>
 				<td th:text="${book.price}"></td>
 				<td th:text="${book.isbn}"></td>
-				<td th:text="${book.category.name}"></td>
+				<td th:text="${book?.category?.name}"></td> 
+				<!-- the ? mark above fixed the issue of null categories which caused the home html crash because this didn't know how to handle null values -->
 				<td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
 				<td><a th:href="@{/modify/{id}(id=${book.id})}" class="btn btn-warning">Modify</a></td>
 			</tr>
