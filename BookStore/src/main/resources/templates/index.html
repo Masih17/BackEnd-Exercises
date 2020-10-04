@@ -4,12 +4,17 @@
 <head>
 <title>Book List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body class="bg-light">
 	<div class="container">
 		<br>
-		<h1>Books</h1>
+		<div class="text-center">
+			<h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
+			<form class="text-right" th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="btn btn-danger" />
+			</form>
+		</div>
 		<br>
 		<table class="table table-striped">
 			<tr>
@@ -19,8 +24,10 @@
 				<th>Price</th>
 				<th>ISBN</th>
 				<th>Category</th>
-				<th></th>
-				<!-- These empty tags are for the bootstrap styling because of Delete and Modify buttons-->
+				<th sec:authorize="hasRole('ADMIN')">Delete</th>
+
+				<!-- These empty tags are for the bootstrap styling because of Delete and Modify buttons
+				/* -->
 				<th></th>
 			</tr>
 			<tr th:each="book: ${books}">
@@ -29,13 +36,14 @@
 				<td th:text="${book.year}"></td>
 				<td th:text="${book.price}"></td>
 				<td th:text="${book.isbn}"></td>
-				<td th:text="${book?.category?.name}"></td> 
+				<td th:text="${book?.category?.name}"></td>
 				<!-- the ? mark above fixed the issue of null categories which caused the home html crash because this didn't know how to handle null values -->
-				<td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+				<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
 				<td><a th:href="@{/modify/{id}(id=${book.id})}" class="btn btn-warning">Modify</a></td>
 			</tr>
 		</table>
 		<a href="/add" class="btn btn-success">Add Book</a>
+
 	</div>
 </body>
 </html>

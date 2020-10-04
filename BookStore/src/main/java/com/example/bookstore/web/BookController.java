@@ -25,6 +25,11 @@ public class BookController {
 
 	@Autowired
 	private CategoryRepository crepository;
+	
+    @RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	}
 
 	// Home page list of books
 	@GetMapping("/home")
@@ -61,7 +66,7 @@ public class BookController {
 		model.addAttribute("book", book);
 		return "modifybook";
 	}
-	
+
 	// REST service to list all the books
 	@GetMapping("/booklist")
 	public @ResponseBody List<Book> bookListRest() {
@@ -74,5 +79,6 @@ public class BookController {
 		return brepository.findById(bookId);
 	}
 //curl -X POST localhost:8080/api/books -H 'Content-type:application/json' -d '{"title": "Siddhartha", "author": "Hermann Hesse", "year": "1922", "isbn": "9766655", "price":"20.0", "category":""}'
+
 
 }

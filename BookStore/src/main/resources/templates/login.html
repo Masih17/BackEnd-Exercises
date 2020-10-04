@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<h3>Bookstore application</h3>
+		<div th:if="${param.error}" class="form-group">
+			<p>Invalid credentials!</p>
+		</div>
+		<div th:if="${param.logout}" class="form-group">
+			<p>Logout Successful!.</p>
+		</div>
+		<form th:action="@{/login}" method="post">
+			<div class="form-group">
+				<label for="username"> User name: <input type="text" name="username" class="form-group" />
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="password"> Password: <input type="password" name="password" class="form-group" />
+				</label>
+			</div>
+			<p>Enter credentials</p>
+			<button class="btn btn-primary" type="submit" value="Sign In">Sign in</button>
+		</form>
+	</div>
+</body>
+</html>
