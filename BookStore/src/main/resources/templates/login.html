@@ -3,29 +3,29 @@
 <head>
 <title>Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<base href="/">
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
 	<div class="container">
-		<h3>Bookstore application</h3>
-		<div th:if="${param.error}" class="form-group">
-			<p>Invalid credentials!</p>
-		</div>
-		<div th:if="${param.logout}" class="form-group">
-			<p>Logout Successful!.</p>
-		</div>
-		<form th:action="@{/login}" method="post">
-			<div class="form-group">
-				<label for="username"> User name: <input type="text" name="username" class="form-group" />
-				</label>
+		<div class="login-form">
+			<div th:if="${param.error}">
+				<h4 style="color: red">Invalid credentials!</h4>
 			</div>
-			<div class="form-group">
-				<label for="password"> Password: <input type="password" name="password" class="form-group" />
-				</label>
+			<form th:action="@{/login}" method="post">
+				<div class="form-group">
+					<h2 class="text-center">Log in</h2>
+					 <input type="text" placeholder="Username" name="username" class="form-control" required="required" />
+				</div>
+				<div class="form-group">
+					<input type="password" placeholder="Password" name="password" class="form-control" required="required" />
+				</div>
+				<button class="btn btn-primary btn-block" type="submit" value="Sign In">Sign in</button>
+			</form>
+			<div class="form-group" th:if="${param.logout}">
+				<p>Logout Successful!</p>
 			</div>
-			<p>Enter credentials</p>
-			<button class="btn btn-primary" type="submit" value="Sign In">Sign in</button>
-		</form>
+		</div>
 	</div>
 </body>
 </html>

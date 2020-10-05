@@ -29,10 +29,11 @@ public class BookController {
     @RequestMapping(value="/login")
 	public String login() {
 		return "login";
+		
 	}
 
 	// Home page list of books
-	@GetMapping("/home")
+    @RequestMapping(value={"/", "/home"})
 	public String bookList(Model model) {
 		model.addAttribute("books", brepository.findAll());
 		return "index";
@@ -56,7 +57,7 @@ public class BookController {
 	@GetMapping(value = "/delete/{id}")
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
 		brepository.deleteById(bookId);
-		return "redirect:../home"; // double dot because the delete must
+		return "redirect:../"; // double dot because the delete must
 	}
 
 	@RequestMapping(value = "/modify/{id}")
