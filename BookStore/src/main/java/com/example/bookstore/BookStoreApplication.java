@@ -13,6 +13,9 @@ import com.example.bookstore.domain.BookRepository;
 import com.example.bookstore.domain.Category;
 import com.example.bookstore.domain.CategoryRepository;
 
+import com.example.bookstore.domain.User;
+import com.example.bookstore.domain.UserRepository;
+
 @SpringBootApplication
 public class BookStoreApplication {
 
@@ -23,32 +26,42 @@ public class BookStoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookListCommand(BookRepository brepository, CategoryRepository crepository) {
+	public CommandLineRunner bookListCommand(BookRepository brepository, CategoryRepository crepository,
+			UserRepository urepository) {
 		return (args) -> {
 
 			// Your code...add some demo data to db
 
 			log.info("Few test book");
-			
+
 			Category history = new Category("History");
 			Category biography = new Category("Biography");
 			Category fiction = new Category("Fiction");
 			Category philosophical = new Category("Philosophical");
-			
+
 			crepository.save(history);
 			crepository.save(biography);
 			crepository.save(fiction);
 			crepository.save(philosophical);
-			
-			brepository.save(new Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 2011, "978-952-279-470-3", 12.00, history));
-			brepository.save(new Book("Homo Deus: A Brief History of Tomorrow", "Yuval Noah Harari", 2016, "978-191-070-187-4", 15.00, history));
-			brepository.save(new Book("Zen and the Art of Motorcycle Maintenance", "Robert M. Pirsig", 1974, "0-688-00230-7", 17.00,fiction));
+
+			brepository.save(new Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", 2011,
+					"978-952-279-470-3", 12.00, history));
+			brepository.save(new Book("Homo Deus: A Brief History of Tomorrow", "Yuval Noah Harari", 2016,
+					"978-191-070-187-4", 15.00, history));
+			brepository.save(new Book("Zen and the Art of Motorcycle Maintenance", "Robert M. Pirsig", 1974,
+					"0-688-00230-7", 17.00, fiction));
+
+			// Creating users: admin/ADMIN, user/USER
+			User user1 = new User("user", "$2a$10$G3nPiMGyXC7U60OvYAmWY.UZH5aSgjkflqlZCrJPAAmtyARjHSUQi", "USER");
+			User user2 = new User("admin", "$2a$10$AOI0yYo/i9AnaqI2Q5YhceBSUzrOzZq4bLCp9Bm1l/vdSdOkvXY6C", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
 
 			log.info("Showing your books");
-			
+
 			for (Book book : brepository.findAll()) {
 				log.info(book.toString());
-			
+
 			}
 
 		};
