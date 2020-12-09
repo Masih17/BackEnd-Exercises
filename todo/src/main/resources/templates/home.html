@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Todo APP</title>
+</head>
+<body>
+	<h1 th:object="${todolist}">Hello</h1>
+
+
+	<table>
+		<tr>
+			<th>Task</th>
+			<th>Status</th>
+			<th>CreatedDate</th>
+			<th>CreatedBy</th>
+		</tr>
+
+		<tr th:each="todo : ${todolist}">
+			<td th:text="${todo.task}"></td>
+			<td th:text="${todo.completed}"></td>
+			<td th:text="${#dates.format(todo.createdDate, 'dd-MMM-yyyy hh:mm')}"></td>
+			<td th:text="${todo.createdBy}"></td>
+		</tr>
+	</table>
+	<a href="/add" class="btn btn-primary">Add Todo</a>
+</body>
+</html>
