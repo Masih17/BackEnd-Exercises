@@ -24,14 +24,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http
 			.authorizeRequests()
-				.antMatchers("/css/**", "/h2-console/**", "/registration", "/saveuser")
+				.antMatchers("/css/**", "/registration", "/saveuser")
 				.permitAll()
-				.and().csrf().ignoringAntMatchers("/h2-console/**")
-		        .and().headers().frameOptions().sameOrigin()
+				.antMatchers("/admin/**").hasRole("ADMIN")
 		        .and()
 			.authorizeRequests()
 				.antMatchers().permitAll()
-				.anyRequest().authenticated().and()
+				.anyRequest().authenticated()
+				.and()
 			.formLogin()
 				.loginPage("/login")
 				.defaultSuccessUrl("/home", true).permitAll()
