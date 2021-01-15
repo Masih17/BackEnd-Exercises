@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.example.BPT.domain.User;
 import com.example.BPT.domain.UserRepository;
 
-
 @Service
 public class UserDetailService implements UserDetailsService {
 	private final UserRepository repository;
@@ -23,8 +22,9 @@ public class UserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User currentUser = repository.findByUsername(username);
-		UserDetails user = new org.springframework.security.core.userdetails.User(username, currentUser.getPasswordHash(),
-				AuthorityUtils.createAuthorityList(currentUser.getRole()));
+		UserDetails user = new org.springframework.security.core.userdetails.User(username,
+				currentUser.getPasswordHash(), AuthorityUtils.createAuthorityList(currentUser.getRole()));
+		System.out.println("ROLE: " + currentUser.getRole());
 		return user;
 	}
 }

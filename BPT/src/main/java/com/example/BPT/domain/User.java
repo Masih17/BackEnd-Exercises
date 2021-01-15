@@ -1,10 +1,8 @@
 package com.example.BPT.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -14,18 +12,16 @@ public class User {
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
 
-	// unique constraint
+
 	@Column(name = "username", nullable = false, unique = true)
 	private String username;
 
 	@Column(name = "password", nullable = false)
+	@JsonIgnore
 	private String passwordHash;
 
 	@Column(name = "role", nullable = false)
 	private String role;
-
-	@Column(name = "email", nullable = true)
-	private String email;
 
 	public User() {
 	}
@@ -61,14 +57,6 @@ public class User {
 		this.passwordHash = passwordHash;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getRole() {
 		return role;
 	}
@@ -76,4 +64,5 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
 }

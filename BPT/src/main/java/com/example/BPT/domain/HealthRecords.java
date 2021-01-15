@@ -21,7 +21,7 @@ public class HealthRecords {
 	private int diastolic;
 	private int pulse;
 	
-	@DateTimeFormat(pattern = "dd.mm.yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 
 	public HealthRecords() {

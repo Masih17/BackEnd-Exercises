@@ -9,26 +9,41 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 import com.example.BPT.web.UserDetailService;
 
-
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	  private UserDetailService userDetailsService; 
 
 	@Autowired
-	  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	    auth.userDetailsService(userDetailsService)
-	    .passwordEncoder(new BCryptPasswordEncoder());
-	  }
-	
+	private UserDetailService userDetailsService;
+
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception { 
 
+		http
+			.authorizeRequests()
+				.antMatchers("/css/**", "/h2-console/**", "/registration", "/saveuser")
+				.permitAll()
+				.and().csrf().ignoringAntMatchers("/h2-console/**")
+		        .and().headers().frameOptions().sameOrigin()
+		        .and()
+			.authorizeRequests()
+				.antMatchers().permitAll()
+				.anyRequest().authenticated().and()
+			.formLogin()
+				.loginPage("/login")
+				.defaultSuccessUrl("/home", true).permitAll()
+				.and()
+			.logout()
+				.permitAll();
+
+	}
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 }
