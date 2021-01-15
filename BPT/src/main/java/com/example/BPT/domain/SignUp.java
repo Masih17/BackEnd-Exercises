@@ -4,22 +4,21 @@ import javax.validation.constraints.Size;
 import javax.validation.constraints.NotEmpty;
 
 public class SignUp {
-	
+
 	@NotEmpty
-    @Size(min=5, max=30)
-    private String username = "";
+	@Size(min = 5, max = 30)
+	private String username = "";
 
+	@NotEmpty
+	@Size(min = 7, max = 30)
+	private String password = "";
 
-    @NotEmpty
-    @Size(min=7, max=30)
-    private String password = "";
+	@NotEmpty
+	@Size(min = 7, max = 30)
+	private String passwordCheck = "";
 
-    @NotEmpty
-    @Size(min=7, max=30)
-    private String passwordCheck = "";
-
-    @NotEmpty
-    private String role = "USER";
+	@NotEmpty
+	private String role = "USER";
 
 	public String getUsername() {
 		return username;

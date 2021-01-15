@@ -1,6 +1,5 @@
 package com.example.BPT.domain;
 
-
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -20,7 +19,7 @@ public class HealthRecords {
 	private int systolic;
 	private int diastolic;
 	private int pulse;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 
@@ -83,6 +82,5 @@ public class HealthRecords {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-
 
 }
